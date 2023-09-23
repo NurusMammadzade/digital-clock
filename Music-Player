@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <audio id="sarki" controls src="Askin Olayim.mp3"></audio>
+    <div id="durum"></div>
+    <button id="oynat">Oynat</button>
+    <input type="range" id="ses" max=100 min=0 value=10>
+
+</head>
+<body>
+    <script>
+ 
+        var sarki=document.getElementById("sarki");
+        var durum=document.getElementById("durum");
+        var oynat=document.getElementById("oynat");
+        var ses=document.getElementById("ses");
+         
+        //oynat butonuna basınca yapılacaklar
+        oynat.onclick=function(){
+        if(sarki.paused)
+        {
+        sarki.play();
+        oynat.textContent="duraklat";
+        }
+        else
+        {
+        sarki.pause();
+        oynat.textContent="oynat";
+        }
+         
+        }
+         
+        //ses ayarı için range nesnesi değiştirildiğinde yapılacaklar
+        ses.oninput=function(){
+        sarki.volume =ses.value/100;
+        }
+         
+         
+        //şarkı yürütülmeye başlandığında
+        sarki.onplay=function(){
+        durum.innerHTML="Şarkı Başladı";
+        }
+        //şarkı yürütülmeye başlandığında
+        sarki.onpause=function(){
+        durum.innerHTML="Şarkı Duraklatıldı";
+        }
+         
+        //controlden ses değiştirildiğinde range nesnesini güncelleme
+        sarki.onvolumechange=function(){
+        ses.value=sarki.volume*100;
+        }
+         
+        </script>
+</body>
+</html>
